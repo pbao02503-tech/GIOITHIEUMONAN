@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Ẩm thực Việt Nam</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f7fa;
+            margin: 0;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 30px auto;
+            background: #fff;
+            padding: 20px 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #1b7f4b;
+        }
+        
+        .food-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+        }
+        
+        .food-card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            background: #fafafa;
+        }
+        
+        .food-card h3 {
+            margin-top: 0;
+            color: #d35400;
+        }
+        
+        .food-card a {
+            display: inline-block;
+            margin-top: 8px;
+            color: #007bff;
+            text-decoration: none;
+        }
+        
+        .food-card a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Ẩm thực Việt Nam</h1>
+        <p>Chọn một món để xem chi tiết:</p>
+
+        <div class="food-list">
+            <div class="food-card">
+                <h3>Phở</h3>
+                <p>Món nước truyền thống với nước dùng đậm đà, bánh phở mềm và thịt bò hoặc gà.</p>
+                <a href="pho.html">Xem chi tiết</a>
+            </div>
+
+            <div class="food-card">
+                <h3>Bánh mì</h3>
+                <p>Ổ bánh giòn rụm, kẹp thịt, pate, rau và nước sốt đậm đà.</p>
+                <a href="banhmi.html">Xem chi tiết</a>
+            </div>
+
+            <div class="food-card">
+                <h3>Bún chả</h3>
+                <p>Thịt nướng than hoa ăn cùng bún tươi, nước mắm chua ngọt và rau sống.</p>
+                <a href="buncha.html">Xem chi tiết</a>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

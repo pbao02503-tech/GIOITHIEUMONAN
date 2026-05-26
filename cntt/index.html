@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Đào tạo các chuyên ngành 2026 - Khoa CNTT</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            background: #0f172a;
+            color: #e5e7eb;
+        }
+        
+        a {
+            color: #38bdf8;
+            text-decoration: none;
+        }
+        
+        a:hover {
+            text-decoration: underline;
+        }
+        
+        .page {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .panel {
+            background: #111827;
+            border-radius: 16px;
+            padding: 24px 32px 28px;
+            max-width: 1150px;
+            width: 100%;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 18px;
+        }
+        
+        .header-title {
+            font-size: 26px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: #f97316;
+        }
+        
+        .header-title .year {
+            color: #fbbf24;
+        }
+        
+        .header-sub {
+            margin-top: 6px;
+            font-size: 14px;
+            color: #93c5fd;
+        }
+        
+        .top-bar {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 16px;
+            align-items: center;
+        }
+        
+        .login-box,
+        .major-select-box {
+            background: #1f2933;
+            border-radius: 10px;
+            padding: 10px 12px;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .login-box input {
+            background: #111827;
+            border: 1px solid #4b5563;
+            border-radius: 6px;
+            padding: 5px 8px;
+            color: #e5e7eb;
+            font-size: 13px;
+        }
+        
+        .login-box button {
+            padding: 6px 10px;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+            background: #22c55e;
+            color: #111827;
+            font-weight: 600;
+        }
+        
+        .login-box button.logout {
+            background: #ef4444;
+            color: #fff;
+        }
+        
+        .login-status {
+            font-size: 12px;
+            color: #a5b4fc;
+        }
+        
+        .major-select-box label {
+            font-weight: 600;
+            color: #facc15;
+        }
+        
+        .major-select-box select {
+            background: #111827;
+            border-radius: 6px;
+            border: 1px solid #4b5563;
+            padding: 5px 8px;
+            color: #e5e7eb;
+            font-size: 13px;
+        }
+        
+        .major-selected {
+            font-size: 12px;
+            color: #6ee7b7;
+        }
+        /* Khối nút lưu/tải file */
+        
+        .file-actions {
+            margin-top: 8px;
+            display: flex;
+            gap: 8px;
+            font-size: 12px;
+            align-items: center;
+        }
+        
+        .file-actions button {
+            padding: 5px 10px;
+            border-radius: 6px;
+            border: 1px solid #4b5563;
+            background: #0f172a;
+            color: #e5e7eb;
+            cursor: pointer;
+        }
+        
+        .file-actions input[type="file"] {
+            font-size: 11px;
+            max-width: 220px;
+        }
+        
+        .content {
+            display: grid;
+            grid-template-columns: 2fr 1.5fr;
+            gap: 18px;
+        }
+        
+        .card {
+            background: #1f2933;
+            border-radius: 14px;
+            padding: 16px 18px;
+            position: relative;
+        }
+        
+        .card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .card-label-main {
+            font-size: 13px;
+            font-weight: 600;
+            background: #ef4444;
+            color: #fff;
+            padding: 4px 10px;
+            border-radius: 999px;
+            margin-right: 8px;
+        }
+        
+        .card-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: #e5e7eb;
+        }
+        
+        .majors-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 1.5fr;
+            gap: 14px;
+            margin-top: 8px;
+        }
+        
+        .major-image-placeholder {
+            background: #4b5563;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            color: #d1d5db;
+            text-align: center;
+            padding: 10px;
+        }
+        
+        .major-list ul {
+            list-style: none;
+            font-size: 13px;
+            line-height: 1.8;
+        }
+        
+        .major-list li::before {
+            content: "• ";
+            color: #60a5fa;
+        }
+        
+        .major-links {
+            margin-top: 10px;
+            font-size: 13px;
+        }
+        
+        .major-links a {
+            display: inline-block;
+            margin-right: 10px;
+            margin-top: 4px;
+            padding: 4px 8px;
+            border-radius: 999px;
+            background: #0f172a;
+            border: 1px solid #374151;
+            font-size: 12px;
+        }
+        
+        .right-grid {
+            display: grid;
+            grid-template-rows: repeat(3, minmax(0, 1fr));
+            gap: 12px;
+        }
+        
+        .right-card-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: #fbbf24;
+            margin-bottom: 4px;
+        }
+        
+        .right-card-body {
+            font-size: 12px;
+            color: #e5e7eb;
+            line-height: 1.7;
+        }
+        
+        .bottom-row {
+            margin-top: 16px;
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 14px;
+        }
+        
+        .bottom-card {
+            background: #1f2933;
+            border-radius: 14px;
+            padding: 12px 14px;
+            font-size: 12px;
+        }
+        
+        .bottom-card-title {
+            font-weight: 600;
+            color: #38bdf8;
+            margin-bottom: 4px;
+        }
+        
+        .footer {
+            margin-top: 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 11px;
+            color: #9ca3af;
+        }
+        
+        .footer-left .school {
+            color: #f97316;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        
+        .footer-right {
+            background: #111827;
+            border-radius: 999px;
+            padding: 6px 12px;
+            border: 1px solid #4b5563;
+            color: #e5e7eb;
+        }
+        
+        @media (max-width: 900px) {
+            .panel {
+                padding: 18px;
+            }
+            .content {
+                grid-template-columns: 1fr;
+            }
+            .bottom-row {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page">
+        <div class="panel">
+            <!-- Header -->
+            <div class="header">
+                <div class="header-title">
+                    ĐÀO TẠO CÁC CHUYÊN NGÀNH <span class="year">2026</span>
+                </div>
+                <div class="header-sub">
+                    KHOA CÔNG NGHỆ THÔNG TIN – TRƯỜNG ĐẠI HỌC ABC
+                </div>
+            </div>
+
+            <!-- Top: login + chọn ngành + lưu/tải file -->
+            <div class="top-bar">
+                <div class="login-box">
+                    <span>Đăng nhập sinh viên:</span>
+                    <input type="text" id="studentId" placeholder="Mã SV">
+                    <input type="text" id="studentName" placeholder="Họ tên">
+                    <button id="loginBtn">Đăng nhập</button>
+                    <button id="logoutBtn" class="logout" style="display:none;">Đăng xuất</button>
+                    <span class="login-status" id="loginStatus"></span>
+                </div>
+
+                <div class="major-select-box" style="flex-direction: column; align-items: flex-start;">
+                    <div style="display:flex; align-items:center; gap:8px;">
+                        <label for="majorSelect">Chọn chuyên ngành: </label>
+                        <select id="majorSelect">
+                        <option value="">-- Chọn --</option>
+                        <option value="HTTT">Hệ thống thông tin</option>
+                        <option value="PTPM">Phát triển phần mềm</option>
+                        <option value="AI">Trí tuệ nhân tạo &amp; Dữ liệu</option>
+                        <option value="MMT">Mạng máy tính &amp; An ninh</option>
+                    </select>
+                        <span class="major-selected" id="majorSelectedText"></span>
+                    </div>
+                    <div class="file-actions">
+                        <button id="saveToFileBtn">Lưu lựa chọn ra file</button>
+                        <label for="loadFromFileInput">Tải từ file:</label>
+                        <input type="file" id="loadFromFileInput" accept="application/json">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Nội dung chính -->
+            <div class="content">
+                <!-- Card lớn CNTT -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-label-main">1. CÔNG NGHỆ THÔNG TIN</div>
+                    </div>
+
+                    <div class="majors-grid">
+                        <div class="major-image-placeholder">
+                            Ảnh minh họa<br>cho ngành CNTT
+                        </div>
+                        <div class="major-list">
+                            <ul>
+                                <li>Hệ thống thông tin</li>
+                                <li>Phát triển phần mềm</li>
+                                <li>Trí tuệ nhân tạo &amp; Dữ liệu</li>
+                                <li>Mạng máy tính &amp; An ninh</li>
+                            </ul>
+                            <div class="major-links">
+                                <a href="httt.html">Chi tiết HTTT</a>
+                                <a href="ptpm.html">Chi tiết PTPM</a>
+                                <a href="ai.html">Chi tiết AI &amp; DL</a>
+                                <a href="mmt.html">Chi tiết Mạng &amp; AN</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cột phải -->
+                <div class="right-grid">
+                    <div class="card">
+                        <div class="right-card-title">KỸ NĂNG MỀM &amp; NGOẠI NGỮ</div>
+                        <div class="right-card-body">
+                            - Kỹ năng thuyết trình, làm việc nhóm<br> - Tiếng Anh chuyên ngành CNTT<br> - Kỹ năng viết CV, phỏng vấn<br>
+                            <a href="thong-tin-truong.html">Xem thêm chính sách hỗ trợ sinh viên</a>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="right-card-title">CƠ HỘI VIỆC LÀM</div>
+                        <div class="right-card-body">
+                            - Lập trình viên, QA/QC, BA<br> - Data Engineer, AI Engineer<br> - Chuyên viên hệ thống, mạng<br>
+                            <a href="co-hoi-nghe-nghiep.html">Xem thêm thống kê việc làm</a>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="right-card-title">LIÊN KẾT DOANH NGHIỆP</div>
+                        <div class="right-card-body">
+                            - Thực tập tại doanh nghiệp đối tác<br> - Dự án thực tế cùng giảng viên<br> - Ngày hội việc làm thường niên<br>
+                            <a href="doi-tac-doanh-nghiep.html">Danh sách doanh nghiệp đối tác</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hàng dưới -->
+            <div class="bottom-row">
+                <div class="bottom-card">
+                    <div class="bottom-card-title">CHƯƠNG TRÌNH ĐÀO TẠO 4 NĂM</div>
+                    <div>Kiến thức nền tảng + chuyên sâu theo từng hướng chuyên ngành.</div>
+                </div>
+                <div class="bottom-card">
+                    <div class="bottom-card-title">CƠ HỘI THỰC TẬP</div>
+                    <div>Sinh viên được phân kỳ thực tập tại doanh nghiệp từ năm 3.</div>
+                </div>
+                <div class="bottom-card">
+                    <div class="bottom-card-title">HỖ TRỢ TƯ VẤN NGÀNH</div>
+                    <div>Giảng viên cố vấn học tập đồng hành trong quá trình chọn chuyên ngành.</div>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <div class="footer">
+                <div class="footer-left">
+                    <span class="school">ĐẠI HỌC ABC</span> – Khoa Công nghệ thông tin<br> Website: www.abc.edu.vn
+                </div>
+                <div class="footer-right">
+                    Hotline tư vấn: 0900 000 000
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // LOGIN
+        const studentIdInput = document.getElementById('studentId');
+        const studentNameInput = document.getElementById('studentName');
+        const loginBtn = document.getElementById('loginBtn');
+        const logoutBtn = document.getElementById('logoutBtn');
+        const loginStatus = document.getElementById('loginStatus');
+
+        function loadLogin() {
+            const stored = localStorage.getItem('studentInfo');
+            if (stored) {
+                const info = JSON.parse(stored);
+                loginStatus.textContent = `Xin chào, ${info.name} (${info.id})`;
+                loginBtn.style.display = 'none';
+                logoutBtn.style.display = 'inline-block';
+                studentIdInput.style.display = 'none';
+                studentNameInput.style.display = 'none';
+            } else {
+                loginStatus.textContent = 'Chưa đăng nhập';
+                loginBtn.style.display = 'inline-block';
+                logoutBtn.style.display = 'none';
+                studentIdInput.style.display = 'inline-block';
+                studentNameInput.style.display = 'inline-block';
+            }
+        }
+
+        loginBtn.addEventListener('click', () => {
+            const id = studentIdInput.value.trim();
+            const name = studentNameInput.value.trim();
+            if (!id || !name) {
+                alert('Vui lòng nhập đầy đủ Mã SV và Họ tên.');
+                return;
+            }
+            localStorage.setItem('studentInfo', JSON.stringify({
+                id,
+                name
+            }));
+            loadLogin();
+        });
+
+        logoutBtn.addEventListener('click', () => {
+            localStorage.removeItem('studentInfo');
+            loadLogin();
+        });
+
+        // CHỌN CHUYÊN NGÀNH
+        const majorSelect = document.getElementById('majorSelect');
+        const majorSelectedText = document.getElementById('majorSelectedText');
+
+        function majorCodeToText(code) {
+            switch (code) {
+                case 'HTTT':
+                    return 'Hệ thống thông tin';
+                case 'PTPM':
+                    return 'Phát triển phần mềm';
+                case 'AI':
+                    return 'Trí tuệ nhân tạo & Dữ liệu';
+                case 'MMT':
+                    return 'Mạng máy tính & An ninh';
+                default:
+                    return '';
+            }
+        }
+
+        function loadMajor() {
+            const saved = localStorage.getItem('studentMajor');
+            if (saved) {
+                majorSelect.value = saved;
+                const text = majorCodeToText(saved);
+                if (text) majorSelectedText.textContent = `Chuyên ngành đã chọn: ${text}`;
+            } else {
+                majorSelectedText.textContent = '';
+            }
+        }
+
+        majorSelect.addEventListener('change', () => {
+            const value = majorSelect.value;
+            if (!value) {
+                localStorage.removeItem('studentMajor');
+                majorSelectedText.textContent = '';
+                return;
+            }
+            localStorage.setItem('studentMajor', value);
+            const text = majorCodeToText(value);
+            majorSelectedText.textContent = `Chuyên ngành đã chọn: ${text}`;
+        });
+
+        // ---- LƯU RA FILE JSON (DOWNLOAD) ----
+        const saveToFileBtn = document.getElementById('saveToFileBtn');
+        const loadFromFileInput = document.getElementById('loadFromFileInput');
+
+        function getCurrentData() {
+            const studentInfo = localStorage.getItem('studentInfo');
+            const major = localStorage.getItem('studentMajor') || '';
+            return {
+                student: studentInfo ? JSON.parse(studentInfo) : null,
+                major: major
+            };
+        }
+
+        function downloadJSON(filename, data) {
+            const blob = new Blob([JSON.stringify(data, null, 2)], {
+                type: 'application/json'
+            });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        saveToFileBtn.addEventListener('click', () => {
+            const data = getCurrentData();
+            if (!data.student && !data.major) {
+                alert('Chưa có thông tin để lưu (đăng nhập và/hoặc chọn chuyên ngành).');
+                return;
+            }
+            downloadJSON('chon_chuyen_nganh.json', data);
+        });
+
+        // ---- ĐỌC TỪ FILE JSON (UPLOAD) ----
+        loadFromFileInput.addEventListener('change', (event) => {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const obj = JSON.parse(e.target.result);
+                    if (obj.student) {
+                        localStorage.setItem('studentInfo', JSON.stringify(obj.student));
+                    } else {
+                        localStorage.removeItem('studentInfo');
+                    }
+                    if (obj.major) {
+                        localStorage.setItem('studentMajor', obj.major);
+                    } else {
+                        localStorage.removeItem('studentMajor');
+                    }
+                    // cập nhật UI
+                    loadLogin();
+                    loadMajor();
+                    alert('Đã nạp dữ liệu từ file.');
+                } catch (err) {
+                    alert('File không đúng định dạng JSON mong đợi.');
+                }
+            };
+            reader.readAsText(file);
+        });
+
+        // init
+        loadLogin();
+        loadMajor();
+    </script>
+</body>
+
+</html>

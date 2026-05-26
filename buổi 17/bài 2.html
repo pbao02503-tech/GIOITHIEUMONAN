@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lab 23 - Danh sách sản phẩm</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- Custom CSS -->
+    <style>
+         :root {
+            --primary-color: #2563eb;
+            --primary-dark: #1d4ed8;
+            --accent-color: #f97316;
+            --card-bg: #0b1120;
+            --page-bg: #020617;
+        }
+        
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background: radial-gradient(circle at top left, rgba(37, 99, 235, 0.35), transparent 55%), radial-gradient(circle at bottom right, rgba(248, 113, 113, 0.3), transparent 55%), var(--page-bg);
+            color: #e5e7eb;
+            min-height: 100vh;
+        }
+        
+        .navbar {
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+        }
+        
+        .navbar-brand {
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            font-size: 0.95rem;
+        }
+        
+        .hero-bar {
+            border-radius: 20px;
+            border: 1px solid rgba(148, 163, 184, 0.3);
+            background: radial-gradient(circle at top left, rgba(37, 99, 235, 0.2), transparent 55%), rgba(15, 23, 42, 0.96);
+            box-shadow: 0 22px 60px rgba(15, 23, 42, 0.9), 0 0 0 1px rgba(15, 23, 42, 0.95);
+        }
+        
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 999px;
+            background: rgba(15, 23, 42, 0.9);
+            border: 1px solid rgba(148, 163, 184, 0.6);
+            font-size: 0.75rem;
+            color: #cbd5f5;
+        }
+        
+        .hero-badge-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 999px;
+            background: #22c55e;
+            box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.4);
+        }
+        
+        .section-title {
+            color: #f9fafb;
+        }
+        
+        .section-title::after {
+            content: "";
+            display: block;
+            width: 72px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            margin-top: 10px;
+            border-radius: 999px;
+        }
+        
+        .product-card {
+            background: radial-gradient(circle at top left, rgba(37, 99, 235, 0.17), transparent 60%), var(--card-bg);
+            border-radius: 18px;
+            border: 1px solid rgba(148, 163, 184, 0.45);
+            overflow: hidden;
+            transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(96, 165, 250, 0.9);
+            box-shadow: 0 20px 45px rgba(15, 23, 42, 0.95);
+        }
+        
+        .product-image-wrapper {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .product-image-wrapper img {
+            width: 100%;
+            height: 230px;
+            object-fit: cover;
+            transition: transform 0.35s ease;
+        }
+        
+        .product-card:hover .product-image-wrapper img {
+            transform: scale(1.05);
+        }
+        
+        .product-badge {
+            position: absolute;
+            top: 14px;
+            left: 14px;
+            border-radius: 999px;
+            padding: 0.25rem 0.7rem;
+            font-size: 0.7rem;
+            border: 1px solid rgba(15, 23, 42, 0.7);
+        }
+        
+        .badge-discount {
+            background: rgba(239, 68, 68, 0.9);
+            color: #fef2f2;
+        }
+        
+        .badge-new {
+            background: rgba(34, 197, 94, 0.9);
+            color: #ecfdf5;
+        }
+        
+        .badge-hot {
+            background: rgba(245, 158, 11, 0.95);
+            color: #fffbeb;
+        }
+        
+        .product-card-body {
+            padding: 1rem 1.1rem 1.1rem;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+        
+        .product-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #e5e7eb;
+            margin-bottom: 0.2rem;
+        }
+        
+        .product-meta {
+            font-size: 0.8rem;
+            color: #9ca3af;
+            margin-bottom: 0.8rem;
+        }
+        
+        .product-price-main {
+            color: #f97316;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+        
+        .product-price-old {
+            font-size: 0.85rem;
+            color: #6b7280;
+            text-decoration: line-through;
+            margin-left: 0.4rem;
+        }
+        
+        .product-footer {
+            margin-top: auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.5rem;
+            margin-top: 0.9rem;
+        }
+        
+        .btn-buy {
+            background: var(--primary-color);
+            border-color: var(--primary-color);
+            font-size: 0.88rem;
+            padding-inline: 1rem;
+            box-shadow: 0 10px 25px rgba(37, 99, 235, 0.5);
+        }
+        
+        .btn-buy:hover {
+            background: var(--primary-dark);
+            border-color: var(--primary-dark);
+            box-shadow: 0 14px 32px rgba(30, 64, 175, 0.7);
+        }
+        
+        .product-label {
+            font-size: 0.75rem;
+            color: #9ca3af;
+        }
+        
+        .filter-pill {
+            border-radius: 999px;
+            border: 1px solid rgba(148, 163, 184, 0.7);
+            color: #e5e7eb;
+            padding: 0.4rem 0.9rem;
+            font-size: 0.85rem;
+            background: rgba(15, 23, 42, 0.9);
+        }
+        
+        .filter-pill.active {
+            background: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+        
+        footer {
+            border-top: 1px solid rgba(148, 163, 184, 0.25);
+            background: rgba(15, 23, 42, 0.98);
+        }
+        
+        @media (max-width: 575.98px) {
+            .product-image-wrapper img {
+                height: 210px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-semibold" href="#">TECH STORE</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+            <div class="collapse navbar-collapse" id="navMenu">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link active" href="#">Sản phẩm</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Khuyến mãi</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Liên hệ</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="py-5">
+        <div class="container py-3">
+            <div class="hero-bar px-4 py-4 mb-4">
+                <div class="d-flex flex-column flex-lg-row align-items-lg-center justify-content-between gap-3">
+                    <div>
+                        <div class="hero-badge mb-2">
+                            <span class="hero-badge-dot"></span>
+                            <span>Landing page danh sách sản phẩm • Lab 23</span>
+                        </div>
+                        <h1 class="fs-3 fw-semibold mb-1 text-white">Danh sách sản phẩm nổi bật</h1>
+                        <p class="mb-0 text-secondary small">
+                            Trang demo sử dụng Bootstrap 5, card sản phẩm, grid responsive và custom CSS để giao diện giống website thương mại điện tử thực tế.
+                        </p>
+                    </div>
+                    <div class="d-flex flex-wrap gap-2">
+                        <button class="filter-pill active" type="button">Tất cả</button>
+                        <button class="filter-pill" type="button">Laptop</button>
+                        <button class="filter-pill" type="button">Điện thoại</button>
+                        <button class="filter-pill" type="button">Phụ kiện</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row g-4">
+                <!-- Sản phẩm 1 -->
+                <div class="col-12 col-sm-6 col-lg-4 col-xl-3">
+                    <article class="product-card">
+                        <div class="product-image-wrapper">
+                            <img src="https://via.placeholder.com/600x400?text=Laptop+Van+Phong" alt="Laptop văn phòng" />
+                            <span class="product-badge badge-discount">-15%</span>
+                        </div>
+                        <div class="product-card-body">
+                            <h2 class="product-title">Laptop văn phòng</h2>
+                            <p class="product-meta">Mỏng nhẹ, pin tốt, phù hợp học tập &amp; làm việc cơ bản.</p>
+                            <div>
+                                <span class="product-price-main">15.990.000đ</span>
+                                <span class="product-price-old">18.800.000đ</span>
+                            </div>
+                            <div class="product-footer">
+                                <button class="btn btn-buy btn-sm" type="button">Thêm vào giỏ</button>
+                                <span class="product-label">Còn hàng</span>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+
+                <!-- Sản phẩm 2 -->
+                <div class="col-12 col-sm-6 col-lg-4 col-xl-3">
+                    <article class="product-card">
+                        <div class="product-image-wrapper">
+                            <img src="https://via.placeholder.com/600x400?text=Smartphone+Cao+Cap" alt="Smartphone cao cấp" />
+                            <span class="product-badge badge-new">Mới</span>
+                        </div>
+                        <div class="product-card-body">
+                            <h2 class="product-title">Smartphone cao cấp</h2>
+                            <p class="product-meta">Màn hình 120Hz, camera sắc nét, hiệu năng mạnh mẽ.</p>
+                            <div>
+                                <span class="product-price-main">12.490.000đ</span>
+                            </div>
+                            <div class="product-footer">
+                                <button class="btn btn-buy btn-sm" type="button">Thêm vào giỏ</button>
+                                <span class="product-label">Còn hàng</span>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+
+                <!-- Sản phẩm 3 -->
+                <div class="col-12 col-sm-6 col-lg-4 col-xl-3">
+                    <article class="product-card">
+                        <div class="product-image-wrapper">
+                            <img src="https://via.placeholder.com/600x400?text=Bo+Phu+Kien" alt="Bộ phụ kiện bàn làm việc" />
+                            <span class="product-badge badge-discount">-20%</span>
+                        </div>
+                        <div class="product-card-body">
+                            <h2 class="product-title">Bộ phụ kiện bàn làm việc</h2>
+                            <p class="product-meta">Setup gọn gàng, phù hợp góc học tập &amp; làm việc.</p>
+                            <div>
+                                <span class="product-price-main">499.000đ</span>
+                                <span class="product-price-old">620.000đ</span>
+                            </div>
+                            <div class="product-footer">
+                                <button class="btn btn-buy btn-sm" type="button">Thêm vào giỏ</button>
+                                <span class="product-label">Sắp hết</span>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+
+                <!-- Sản phẩm 4 -->
+                <div class="col-12 col-sm-6 col-lg-4 col-xl-3">
+                    <article class="product-card">
+                        <div class="product-image-wrapper">
+                            <img src="https://via.placeholder.com/600x400?text=Laptop+Doanh+Nhan" alt="Laptop doanh nhân" />
+                            <span class="product-badge badge-hot">Hot</span>
+                        </div>
+                        <div class="product-card-body">
+                            <h2 class="product-title">Laptop doanh nhân</h2>
+                            <p class="product-meta">Thiết kế sang trọng, bảo mật cao, hiệu năng ổn định.</p>
+                            <div>
+                                <span class="product-price-main">24.990.000đ</span>
+                            </div>
+                            <div class="product-footer">
+                                <button class="btn btn-buy btn-sm" type="button">Thêm vào giỏ</button>
+                                <span class="product-label">Còn hàng</span>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+
+                <!-- Sản phẩm 5 -->
+                <div class="col-12 col-sm-6 col-lg-4 col-xl-3">
+                    <article class="product-card">
+                        <div class="product-image-wrapper">
+                            <img src="https://via.placeholder.com/600x400?text=Dien+Thoai+Tam+Trung" alt="Điện thoại tầm trung" />
+                            <span class="product-badge badge-discount">Giảm giá</span>
+                        </div>
+                        <div class="product-card-body">
+                            <h2 class="product-title">Điện thoại tầm trung</h2>
+                            <p class="product-meta">Cân bằng giữa hiệu năng, camera và pin.</p>
+                            <div>
+                                <span class="product-price-main">6.290.000đ</span>
+                            </div>
+                            <div class="product-footer">
+                                <button class="btn btn-buy btn-sm" type="button">Thêm vào giỏ</button>
+                                <span class="product-label">Còn hàng</span>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+
+                <!-- Sản phẩm 6 -->
+                <div class="col-12 col-sm-6 col-lg-4 col-xl-3">
+                    <article class="product-card">
+                        <div class="product-image-wrapper">
+                            <img src="https://via.placeholder.com/600x400?text=Laptop+Hoc+Tap" alt="Laptop học tập" />
+                            <span class="product-badge badge-new">Mới</span>
+                        </div>
+                        <div class="product-card-body">
+                            <h2 class="product-title">Laptop học tập</h2>
+                            <p class="product-meta">Học online, làm đồ án cơ bản, giá dễ tiếp cận.</p>
+                            <div>
+                                <span class="product-price-main">9.490.000đ</span>
+                            </div>
+                            <div class="product-footer">
+                                <button class="btn btn-buy btn-sm" type="button">Thêm vào giỏ</button>
+                                <span class="product-label">Còn hàng</span>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="py-4">
+        <div class="container text-center small text-secondary">
+            &copy; 2026 Tech Store • Bootstrap 5 + custom CSS demo cho Lab 23
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

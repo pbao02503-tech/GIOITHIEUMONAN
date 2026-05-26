@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>phamngocbao.id.vn</title>
+
+    <link href="http://phamngocbao.id.vn/" rel="stylesheet" />
+    <style>
+        .hero {
+            background: linear-gradient(rgba(7, 16, 36, 0.75), rgba(7, 16, 36, 0.75)), url('https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+            color: white;
+        }
+        
+        .section-title::after {
+            content: "";
+            display: block;
+            width: 70px;
+            height: 4px;
+            background: #0d6efd;
+            margin-top: 12px;
+            border-radius: 999px;
+        }
+        
+        body {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top shadow-sm">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="http://phamngocbao.id.vn/">EventClub</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+            <div class="collapse navbar-collapse" id="navMenu">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link active" href="#gioi-thieu">Giới thiệu</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#noi-bat">Nổi bật</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#lich-trinh">Lịch trình</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#dang-ky">Đăng ký</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <header id="gioi-thieu" class="hero pt-5">
+        <div class="container py-5" style="min-height: 100vh;">
+            <div class="row align-items-center py-5">
+                <div class="col-lg-7">
+                    <span class="badge bg-warning text-dark rounded-pill mb-3">Sự kiện nổi bật 2026</span>
+                    <h1 class="display-4 fw-bold mb-3">Tech &amp; Design Summit 2026</h1>
+                    <p class="lead mb-4">
+                        Chuỗi hội thảo dành cho sinh viên, designer và lập trình viên với nội dung thực chiến, diễn giả chất lượng và hoạt động trải nghiệm trực tiếp.
+                    </p>
+                    <div class="d-flex gap-2 flex-wrap">
+                        <a href="#dang-ky" class="btn btn-primary btn-lg">Đăng ký ngay</a>
+                        <a href="#lich-trinh" class="btn btn-outline-light btn-lg">Xem lịch trình</a>
+                    </div>
+                </div>
+                <div class="col-lg-5 mt-5 mt-lg-0">
+                    <div class="card border-0 shadow-lg text-dark">
+                        <div class="card-body p-4">
+                            <h5 class="card-title fw-bold mb-3">Thông tin nhanh</h5>
+                            <ul class="list-unstyled mb-0">
+                                <li class="mb-2"><strong>Thời gian:</strong> 25/06/2026</li>
+                                <li class="mb-2"><strong>Địa điểm:</strong> Hà Nội</li>
+                                <li class="mb-2"><strong>Hình thức:</strong> Trực tiếp + Livestream</li>
+                                <li><strong>Đối tượng:</strong> Sinh viên, developer, designer</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section id="noi-bat" class="py-5 bg-light">
+        <div class="container py-4">
+            <h2 class="section-title fw-bold mb-4">Điểm nổi bật</h2>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card h-100 shadow-sm border-0">
+                        <div class="card-body p-4">
+                            <h5 class="card-title">Diễn giả thực chiến</h5>
+                            <p class="card-text text-muted">Gặp gỡ chuyên gia từ doanh nghiệp công nghệ, thiết kế và khởi nghiệp.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100 shadow-sm border-0">
+                        <div class="card-body p-4">
+                            <h5 class="card-title">Workshop trực tiếp</h5>
+                            <p class="card-text text-muted">Thực hành công cụ, quy trình và kỹ năng thông qua hoạt động tương tác.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100 shadow-sm border-0">
+                        <div class="card-body p-4">
+                            <h5 class="card-title">Kết nối cộng đồng</h5>
+                            <p class="card-text text-muted">Cơ hội networking, chia sẻ ý tưởng và tìm kiếm đồng đội cho dự án.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-5">
+        <div class="container py-4">
+            <h2 class="section-title fw-bold mb-4">Hình ảnh sự kiện</h2>
+            <div id="eventCarousel" class="carousel slide shadow rounded overflow-hidden" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=1600&q=80" class="d-block w-100" alt="Event 1">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=1600&q=80" class="d-block w-100" alt="Event 2">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://images.unsplash.com/photo-1528605248644-14dd04022da1?auto=format&fit=crop&w=1600&q=80" class="d-block w-100" alt="Event 3">
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#eventCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+      </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#eventCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+      </button>
+            </div>
+        </div>
+    </section>
+
+    <section id="lich-trinh" class="py-5 bg-light">
+        <div class="container py-4">
+            <h2 class="section-title fw-bold mb-4">Lịch trình</h2>
+            <div class="row g-4">
+                <div class="col-lg-6">
+                    <div class="list-group shadow-sm">
+                        <div class="list-group-item d-flex justify-content-between align-items-center">
+                            <span><strong>08:00</strong> - Check-in và đón khách</span>
+                            <span class="badge bg-primary rounded-pill">Mở đầu</span>
+                        </div>
+                        <div class="list-group-item d-flex justify-content-between align-items-center">
+                            <span><strong>09:00</strong> - Khai mạc sự kiện</span>
+                            <span class="badge bg-primary rounded-pill">Chính thức</span>
+                        </div>
+                        <div class="list-group-item d-flex justify-content-between align-items-center">
+                            <span><strong>10:00</strong> - Talkshow với diễn giả</span>
+                            <span class="badge bg-primary rounded-pill">Nổi bật</span>
+                        </div>
+                        <div class="list-group-item d-flex justify-content-between align-items-center">
+                            <span><strong>13:30</strong> - Workshop thực hành</span>
+                            <span class="badge bg-primary rounded-pill">Thực chiến</span>
+                        </div>
+                        <div class="list-group-item d-flex justify-content-between align-items-center">
+                            <span><strong>16:30</strong> - Bế mạc và networking</span>
+                            <span class="badge bg-primary rounded-pill">Kết thúc</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="card border-0 shadow-sm h-100">
+                        <div class="card-body p-4">
+                            <h5 class="fw-bold mb-3">Hoạt động chính</h5>
+                            <div class="row g-3">
+                                <div class="col-sm-6">
+                                    <div class="p-3 bg-white border rounded h-100">
+                                        <strong>Talkshow</strong>
+                                        <p class="mb-0 text-muted small">Chia sẻ kinh nghiệm từ chuyên gia.</p>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="p-3 bg-white border rounded h-100">
+                                        <strong>Mini game</strong>
+                                        <p class="mb-0 text-muted small">Giao lưu, nhận quà lưu niệm.</p>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="p-3 bg-white border rounded h-100">
+                                        <strong>Workshop</strong>
+                                        <p class="mb-0 text-muted small">Thực hành theo nhóm nhỏ.</p>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="p-3 bg-white border rounded h-100">
+                                        <strong>Networking</strong>
+                                        <p class="mb-0 text-muted small">Kết nối bạn bè và cộng đồng.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="dang-ky" class="py-5">
+        <div class="container py-4">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-body p-4 p-md-5">
+                            <h2 class="section-title fw-bold mb-4">Đăng ký tham gia</h2>
+                            <form>
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <label class="form-label">Họ và tên</label>
+                                        <input type="text" class="form-control" placeholder="Nhập họ tên">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Email</label>
+                                        <input type="email" class="form-control" placeholder="Nhập email">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Số điện thoại</label>
+                                        <input type="tel" class="form-control" placeholder="Nhập số điện thoại">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Vai trò</label>
+                                        <select class="form-select">
+                    <option>Sinh viên</option>
+                    <option>Developer</option>
+                    <option>Designer</option>
+                    <option>Khác</option>
+                  </select>
+                                    </div>
+                                    <div class="col-12">
+                                        <label class="form-label">Ghi chú</label>
+                                        <textarea class="form-control" rows="4" placeholder="Thông tin thêm nếu có"></textarea>
+                                    </div>
+                                    <div class="col-12 d-flex justify-content-between align-items-center flex-wrap gap-3">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="agree">
+                                            <label class="form-check-label" for="agree">Tôi đồng ý nhận thông tin sự kiện</label>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary px-4">Gửi đăng ký</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-4 bg-dark text-white">
+        <div class="container text-center">
+            <small>&copy; 2026 phamngocbao.id.vn </small>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
